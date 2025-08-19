@@ -57,9 +57,7 @@ const loginUser = requestHandler(async (req, res) => {
     throw new ApiError(400, "username or email is required");
   }
 
-  const foundUser = await User.findOne(
-    email ? { email } : { username }
-  );
+  const foundUser = await User.findOne(email ? { email } : { username });
 
   if (!foundUser) {
     throw new ApiError(404, "User not found with this email or username");
@@ -70,8 +68,9 @@ const loginUser = requestHandler(async (req, res) => {
     throw new ApiError(401, "Invalid credentials");
   }
 
-  const { accessToken, refreshToken } =
-    await generateAccessAndRefreshTokens(foundUser._id);
+  const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
+    foundUser._id
+  );
 
   const loggedInUser = await User.findById(foundUser._id).select(
     "-password -refreshToken -createdAt -updatedAt"
