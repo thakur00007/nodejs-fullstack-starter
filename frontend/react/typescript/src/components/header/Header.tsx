@@ -31,7 +31,7 @@ function Header() {
       {({ open, close }: { open: boolean; close: () => void }) => (
         <>
           {/* HEADER */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               {/* Left - Mobile Menu Toggle */}
               <div className="flex items-center md:hidden">

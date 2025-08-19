@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, type JSX } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "./";
 import type { AuthState } from "../store/auth/authSlice";
 
+interface AuthLayoutProps {
+  authenicated?: boolean;
+  children: React.ReactNode;
+}
+
 function AuthLayout({
   authenicated = true,
   children,
-}: React.PropsWithChildren & { authenicated?: boolean }) {
+}: AuthLayoutProps): JSX.Element {
   const { status: authStatus }: AuthState = useSelector(
     (state: { auth: AuthState }) => state.auth
   );
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     if (authenicated && authStatus !== authenicated) {
-      navigate("/login");
+      navigate("/signin");
+    } else if (!authenicated && authStatus !== authenicated) {
+      navigate("/");
     }
-    // else if (!authenicated && authStatus !== authenicated) {
-    //   navigate("/");
-    // }
     setLoading(false);
   }, [authenicated, authStatus, navigate]);
 

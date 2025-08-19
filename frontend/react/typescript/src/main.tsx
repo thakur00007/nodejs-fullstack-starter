@@ -7,17 +7,32 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Home from "./components/home/Home.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import { Signup, Signin } from "./pages/";
+import { AuthLayout } from "./components/";
+import { Home } from "./pages/";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Home />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/signin" element={<Signin />} />
+      <Route
+        path="/signup"
+        element={
+          <AuthLayout authenicated={false}>
+            <Signup />
+          </AuthLayout>
+        }
+      />
+      <Route
+        path="/signin"
+        element={
+          <AuthLayout authenicated={false}>
+            <Signin />
+          </AuthLayout>
+        }
+      />
     </Route>
   )
 );

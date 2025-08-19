@@ -1,5 +1,6 @@
 // import axios from "axios";
 import type { ApiResponse, User, UserLogin, UserSignup } from "../types/";
+import ApiError from "../util/ApiError";
 import { setValue, getValue } from "../util/localStorage";
 
 export class UserService {
@@ -24,13 +25,16 @@ export class UserService {
 
       const responseData: ApiResponse<{ user: User }> = await response.json();
 
-      if (!response.ok) {
-        throw new Error(responseData.message);
+      if (!response.ok && responseData?.name === "ApiError") {
+        throw new ApiError(responseData.message);
       }
 
       return responseData;
     } catch (error) {
-      throw error;
+      if (error instanceof ApiError) {
+        throw error;
+      }
+      throw new ApiError("An unexpected error occurred! Please try again.");
     }
   }
 
@@ -50,8 +54,8 @@ export class UserService {
         refreshToken: string;
       }> = await response.json();
 
-      if (!response.ok) {
-        throw new Error(responseData.message);
+      if (!response.ok && responseData?.name === "ApiError") {
+        throw new ApiError(responseData.message);
       }
       responseData.data.accessToken &&
         setValue("access-token", responseData.data.accessToken);
@@ -60,7 +64,10 @@ export class UserService {
 
       return responseData;
     } catch (error) {
-      throw error;
+      if (error instanceof ApiError) {
+        throw error;
+      }
+      throw new ApiError("An unexpected error occurred! Please try again.");
     }
   }
 
@@ -82,13 +89,15 @@ export class UserService {
         refreshToken: string;
       }> = await response.json();
 
-      if (!response.ok) {
-        throw new Error(responseData.message);
+      if (!response.ok && responseData?.name === "ApiError") {
+        throw new ApiError(responseData.message);
       }
       return responseData;
     } catch (error) {
-      // return null;
-      throw error;
+      if (error instanceof ApiError) {
+        throw error;
+      }
+      throw new ApiError("An unexpected error occurred! Please try again.");
     }
   }
 
@@ -106,12 +115,15 @@ export class UserService {
       });
       const responseData: ApiResponse<unknown> = await response.json();
 
-      if (!response.ok) {
-        throw new Error(responseData.message);
+      if (!response.ok && responseData?.name === "ApiError") {
+        throw new ApiError(responseData.message);
       }
       return responseData;
     } catch (error) {
-      throw error;
+      if (error instanceof ApiError) {
+        throw error;
+      }
+      throw new ApiError("An unexpected error occurred! Please try again.");
     }
   }
 

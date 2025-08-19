@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, type JSX } from "react";
 
 // Enhanced Input Component with better styling
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -16,7 +16,7 @@ function Input({
   message,
   className = "",
   ...props
-}: InputProps) {
+}: InputProps): JSX.Element {
   const id = useId();
 
   return (

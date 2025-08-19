@@ -1,6 +1,7 @@
-import React from "react";
+import React, { type JSX } from "react";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
+  children: React.ReactNode;
 }
 
 function Button({
@@ -9,7 +10,7 @@ function Button({
   className = "",
   disabled,
   ...props
-}: ButtonProps) {
+}: ButtonProps): JSX.Element {
   return (
     <button
       className={`

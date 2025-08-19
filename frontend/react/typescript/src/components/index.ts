@@ -6,8 +6,10 @@ import Container from "./Container";
 import RegisterComponent from "./register/RegisterComponent";
 import LoginComponent from "./login/LoginComponent";
 import Header from "./header/Header";
+import HomeComponent from "./home/HomeComponent";
 
 export {
+  HomeComponent,
   Button,
   Input,
   Loading,
