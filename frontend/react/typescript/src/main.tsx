@@ -9,14 +9,20 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
-import { Signup, Signin } from "./pages/";
+import { Signup, Signin, Home, Dashboard } from "./pages/";
 import { AuthLayout } from "./components/";
-import { Home } from "./pages/";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<Home />} />
+      <Route
+        index
+        element={
+          <AuthLayout authenicated={false}>
+            <Home />
+          </AuthLayout>
+        }
+      />
       <Route
         path="/signup"
         element={
@@ -30,6 +36,14 @@ const router = createBrowserRouter(
         element={
           <AuthLayout authenicated={false}>
             <Signin />
+          </AuthLayout>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <AuthLayout authenicated={true}>
+            <Dashboard />
           </AuthLayout>
         }
       />

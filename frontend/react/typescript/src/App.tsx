@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 import UserService from "./services/userService";
 import { useDispatch, useSelector } from "react-redux";
-import { login, type AuthState } from "./store/auth/authSlice";
+import { login, logout, type AuthState } from "./store/auth/authSlice";
 import { Header, Loading } from "./components";
 
 function App() {
@@ -20,6 +20,8 @@ function App() {
       .then((res) => {
         if (res.data.user) {
           dispatch(login(res.data.user));
+        } else {
+          dispatch(logout());
         }
       })
       .catch(() => {

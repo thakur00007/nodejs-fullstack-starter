@@ -7,6 +7,7 @@ import RegisterComponent from "./register/RegisterComponent";
 import LoginComponent from "./login/LoginComponent";
 import Header from "./header/Header";
 import HomeComponent from "./home/HomeComponent";
+import DashboardComponent from "./dashboard/DashboardComponent";
 
 export {
   HomeComponent,
@@ -18,4 +19,5 @@ export {
   Container,
   RegisterComponent,
   LoginComponent,
+  DashboardComponent,
 };

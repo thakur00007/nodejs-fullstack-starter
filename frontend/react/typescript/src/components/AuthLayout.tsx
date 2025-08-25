@@ -21,8 +21,10 @@ function AuthLayout({
   useEffect(() => {
     if (authenicated && authStatus !== authenicated) {
       navigate("/signin");
+      return;
     } else if (!authenicated && authStatus !== authenicated) {
-      navigate("/");
+      navigate("/dashboard");
+      return;
     }
     setLoading(false);
   }, [authenicated, authStatus, navigate]);
